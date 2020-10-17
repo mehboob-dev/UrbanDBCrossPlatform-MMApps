@@ -79,6 +79,17 @@ def getCell(rowIndex, columnIndex):
     cellAddress=str(1+1)+"/"+str(1)
     return requests.get(requestURL()+"/getCell/"+cellAddress).json()
 
+def getHeader():
+    """
+
+    Returns
+    -------
+    LIST
+        IT WILL RETURN HEADER IN A LIST FORMAT
+
+    """
+    return requests.get(requestURL()+"/getHeader").json()
+    
 def appendRow(rowData):
     """
 
@@ -96,9 +107,28 @@ def appendRow(rowData):
     """
     return requests.get(requestURL()+"/appendRow/"+str(', '.join(rowData.split(",")))).json()
 
+def appendRows(rowsData):
+    """
+
+    Parameters
+    ----------
+    rowsData : STRING
+        EXAMPLE ("THIS,IS,A,SAMPLE,STRING>>P,Y,T,H,O,N>>I,S>>P,O,W,E,R")
+        ENTER THE STRING WITH COMMA SEPRETED STYLE WITH INCERTED COMMA AT START AND ENDFOR EACH ROW.
+        SEPERATE ROW USING >>
+
+    Returns
+    -------
+    TYPE
+        DESCRIPTION.
+
+    """
+    return requests.get(requestURL()+"/appendRows/"+str(', '.join(rowsData.split(",")))).json()
+
 # print(getAllRows())
 # print(getRow(1))
 # print(getColumn(1))
 # print(getCell(1, 1))
-print(appendRow("a,b,3,r,5,g,u"))
-
+# print(appendRow("p,y,t,h,o,n"))
+# print(getHeader())
+# appendRows("p,y,t,h,o,n>>i,s>>p,o,w,e,r")

@@ -5,12 +5,17 @@ Created on
 @author: MMApps
 @contact: mehboob_dev@mmappps.in
 @ProjectName: UrbanDBCrossPlatform-MMApps
-Contact for Getting SubscriptionMany More Method on Way..!!
+Contact for Getting Subscription. Many More Method on Way..!!
 """
 
 import requests
 
 API = "OCBwZCu41n"
+SheetName = "Sheet1"
+#Enter Your API Key.
+
+def requestURL():
+    return "http://urbandb.mmapps.in/"+API+"/"+SheetName
 
 def getAllRows():
     """
@@ -21,7 +26,7 @@ def getAllRows():
         IT WILL RETURN COMPLETE SHETE IN A JSON FORMAT.
 
     """
-    return requests.get("http://urbandb.mmapps.in/"+API+"/Sheet1/getAllRows").json()
+    return requests.get(requestURL()+"/getAllRows").json()
 
 def getRow(rowIndex):
     """
@@ -37,7 +42,7 @@ def getRow(rowIndex):
         IT WILL RETURN THE ROW AT THE ENTERED INDEX IN JSON FORMAT.
         
     """
-    return requests.get("http://urbandb.mmapps.in/"+API+"/Sheet1/getRow/"+str(rowIndex+1)).json()
+    return requests.get(requestURL()+"/getRow/"+str(rowIndex+1)).json()
 
 def getColumn(columnIndex):
     """
@@ -53,7 +58,7 @@ def getColumn(columnIndex):
         IT WILL RETURN ROW DATA AT THE ENTERED INDEX IN JSON FORMAT.
 
     """
-    return requests.get("http://urbandb.mmapps.in/"+API+"/Sheet1/getColumn/"+str(columnIndex)).json()
+    return requests.get(requestURL()+"/getColumn/"+str(columnIndex)).json()
 
 def getCell(rowIndex, columnIndex):
     """
@@ -72,7 +77,7 @@ def getCell(rowIndex, columnIndex):
 
     """
     cellAddress=str(1+1)+"/"+str(1)
-    return requests.get("http://urbandb.mmapps.in/"+API+"/Sheet1/getCell/"+cellAddress).json()
+    return requests.get(requestURL()+"/getCell/"+cellAddress).json()
 
 def appendRow(rowData):
     """
@@ -89,10 +94,11 @@ def appendRow(rowData):
         IT WILL RETURN INFORMATION WITH CORDINATES OF UPLOADED DATA.
 
     """
-    return requests.get("http://urbandb.mmapps.in/"+API+"/Sheet1/appendRow/"+str(', '.join(rowData.split(",")))).json()
+    return requests.get(requestURL()+"/appendRow/"+str(', '.join(rowData.split(",")))).json()
 
 # print(getAllRows())
 # print(getRow(1))
 # print(getColumn(1))
 # print(getCell(1, 1))
-# print(appendRow("a,b,3,r,5,g,u"))
+print(appendRow("a,b,3,r,5,g,u"))
+

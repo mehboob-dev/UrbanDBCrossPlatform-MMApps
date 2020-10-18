@@ -125,6 +125,28 @@ def appendRows(rowsData):
     """
     return requests.get(requestURL()+"/appendRows/"+str(', '.join(rowsData.split(",")))).json()
 
+def upload_file(filepath):
+    """
+
+    Parameters
+    ----------
+    filepath : STRING
+        ENTER THE FILE LOCATION.
+
+    Returns
+    -------
+    JSON
+        RETURN THE MESSAGE WHEATHER UPLOAD IS SUCESSFUL OR NOT.
+
+    """
+    payload = {}
+    files = [
+      ('file', open(filepath,'rb'))
+    ]
+    headers= {}
+    response = requests.request("POST", requestURL()+"/file-upload", headers=headers, data = payload, files = files)
+    return response.text.encode('utf8')
+
 # print(getAllRows())
 # print(getRow(1))
 # print(getColumn(1))
@@ -132,3 +154,5 @@ def appendRows(rowsData):
 # print(appendRow("p,y,t,h,o,n"))
 # print(getHeader())
 # appendRows("p,y,t,h,o,n>>i,s>>p,o,w,e,r")
+jj=upload_file("C://Users//pc//Desktop//untitled.png")
+jj.text

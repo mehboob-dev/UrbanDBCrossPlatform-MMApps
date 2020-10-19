@@ -9,13 +9,14 @@ Contact for Getting Subscription. Many More Method on Way..!!
 """
 
 import requests
+import os
 
 API = "OCBwZCu41n"
 SheetName = "Sheet1"
 #Enter Your API Key.
 
 def requestURL():
-    return "http://urbandb.mmapps.in/"+API+"/"+SheetName
+    return "https://urbandb-mmapps.herokuapp.com/"+API+"/"+SheetName
 
 def getAllRows():
     """
@@ -145,8 +146,29 @@ def upload_file(filepath):
     ]
     headers= {}
     response = requests.request("POST", requestURL()+"/file-upload", headers=headers, data = payload, files = files)
-    return response.text.encode('utf8')
+    return response.text#.encode('utf8')
 
+def download_file(filename, downloadpath=""):
+    """
+
+    Parameters
+    ----------
+    filename : STRING
+        ENTER THE FILE NAME DURING UPLOAD.
+    downloadpath : PATH, optional
+        PATH TO DOWNLOAD LOCATION, DO NOT PASS ANY VALUE IF YOU WANT TO DOWNLOAD ON ROOT DIRECTORY OF CODE. The default is "".
+
+    Returns
+    -------
+    None.
+
+    """
+    reqfile = requests.get(requestURL()+"/getupload/"+str(filename)).url
+    response=requests.get(reqfile)
+    with open(os.path.join(downloadpath,reqfile.split("/")[-1]), 'wb') as f:
+        f.write(response.content)
+    print("Download Done")
+    
 # print(getAllRows())
 # print(getRow(1))
 # print(getColumn(1))
@@ -154,5 +176,5 @@ def upload_file(filepath):
 # print(appendRow("p,y,t,h,o,n"))
 # print(getHeader())
 # appendRows("p,y,t,h,o,n>>i,s>>p,o,w,e,r")
-jj=upload_file("C://Users//pc//Desktop//untitled.png")
-jj.text
+# jj=upload_file("PathToMediaFile")
+aa = download_file(4642)#.text

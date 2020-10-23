@@ -179,6 +179,27 @@ def download_file(filename, downloadpath=""):
         downloadfile.write(response.content)
     return "Download Done"
 
+def verify_user(idcolumn,userid,passwordcolumn):
+    """
+
+    Parameters
+    ----------
+    idcolumn : STRING
+        ENTER THE COLUMNNAME IN WHICH USERID EXIST.
+    userid : STRING
+        ENTER THE USERID WHICH YOU NEED TO VERIFY.
+    passwordcolumn : STRING
+        ENTER THE PASSWORD COLUMN NAME TO GET PASSWORD FROM DATABASE.
+
+    Returns
+    -------
+    STRING
+        IT RETURNS USER PASSWORD.
+
+    """
+    args = ((idcolumn,userid,passwordcolumn))
+    return requests.get(request_url()+"/verifyuser/"+"/".join(args)).text
+
 # print(get_all_rows())
 # print(get_row(1))
 # print(get_column(1))
@@ -188,3 +209,4 @@ def download_file(filename, downloadpath=""):
 # append_rows("p,y,t,h,o,n>>i,s>>p,o,w,e,r")
 # jj=upload_file("PathToMediaFile")
 #aa = download_file(4642)#.text
+op = verify_user("Rep", "Howard", "OrderDate")

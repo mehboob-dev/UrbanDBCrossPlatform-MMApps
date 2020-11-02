@@ -115,7 +115,7 @@ def append_row(rowdata):
         IT WILL RETURN INFORMATION WITH CORDINATES OF UPLOADED DATA.
 
     """
-    return requests.get(request_url()+"/append_row/"+str(', '.join(rowdata.split(",")))).json()
+    return requests.get(request_url()+"/appendRow/"+str(', '.join(rowdata.split(",")))).json()
 
 def append_rows(rowsdata):
     """

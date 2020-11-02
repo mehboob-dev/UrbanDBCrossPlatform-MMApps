@@ -10,6 +10,7 @@ Contact for Getting Subscription. Many More Method on Way..!!
 
 import os
 import requests
+import pandas as pd
 
 API = "OCBwZCu41n"
 SHEETNAME = "Sheet1"
@@ -35,7 +36,7 @@ def get_all_rows():
         IT WILL RETURN COMPLETE SHETE IN A JSON FORMAT.
 
     """
-    return requests.get(request_url()+"/get_all_rows").json()
+    return requests.get(request_url()+"/getAllRows").json()
 
 def get_row(rowindex):
     """
@@ -200,13 +201,14 @@ def verify_user(idcolumn,userid,passwordcolumn):
     args = ((idcolumn,userid,passwordcolumn))
     return requests.get(request_url()+"/verifyuser/"+"/".join(args)).text
 
-# print(get_all_rows())
+
+# print(pd.DataFrame.from_dict(get_all_rows()))
 # print(get_row(1))
 # print(get_column(1))
 # print(get_cell(1, 1))
 # print(append_row("p,y,t,h,o,n"))
 # print(get_header())
-# append_rows("p,y,t,h,o,n>>i,s>>p,o,w,e,r")
-# jj=upload_file("PathToMediaFile")
-#aa = download_file(4642)#.text
-op = verify_user("Rep", "Howard", "OrderDate")
+# print(append_rows("p,y,t,h,o,n>>i,s>>p,o,w,e,r"))
+# print(upload_file("PathToMediaFile"))
+# print(download_file(4642))#.text
+# print(erify_user("Rep", "Howard", "OrderDate"))

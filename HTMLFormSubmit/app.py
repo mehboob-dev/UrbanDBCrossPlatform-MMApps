@@ -12,8 +12,8 @@ from flask import Flask, request, redirect, render_template
 import requests as req
 
 app = Flask(__name__)
-API = "5G6ETIPAN0"#Enter API Here
-SHEETNAME = "ContactForm"#Enter your Sheet Name Here
+API = "OCBwZCu41n"#Enter API Here
+SHEETNAME = "Sheet1"#Enter your Sheet Name Here
 
 @app.route("/")
 def homepage():

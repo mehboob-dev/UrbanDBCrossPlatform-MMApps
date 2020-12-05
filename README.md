@@ -16,6 +16,9 @@ Using UrbanDB, You can Perform lots of query.
 5. Append Row
 6. Get Header
 7. Append Rows
+8. Verify User
+9. Get Last Row
+10. Get Last Column
 
 More method on way.
 
@@ -25,7 +28,7 @@ Email:
 mehboob_dev@mmapps.in
 
 Telegram:
-@mm_apps
+@mmapps2106
 
 MMApps
 

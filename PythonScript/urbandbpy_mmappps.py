@@ -12,7 +12,7 @@ import os
 import requests
 import pandas as pd
 
-API = "OCBwZCu41n"
+API = "trydemo"
 SHEETNAME = "Sheet1"
 #Enter Your API Key.
 
@@ -25,7 +25,7 @@ def request_url():
         INTERNAL FUNCTION.
 
     """
-    return "https://urbandb-mmapps.herokuapp.com/"+API+"/"+SHEETNAME
+    return "https://urbandb.mmapps.in/"+API+"/"+SHEETNAME
 
 def get_all_rows():
     """
@@ -36,7 +36,7 @@ def get_all_rows():
         IT WILL RETURN COMPLETE SHETE IN A JSON FORMAT.
 
     """
-    return requests.get(request_url()+"/getAllRows").json()
+    return pd.DataFrame.from_dict(requests.get(request_url()+"/getAllRows").json())
 
 def get_row(rowindex):
     """
@@ -52,7 +52,7 @@ def get_row(rowindex):
         IT WILL RETURN THE ROW AT THE ENTERED INDEX IN JSON FORMAT.
 
     """
-    return requests.get(request_url()+"/get_row/"+str(rowindex+1)).json()
+    return requests.get(request_url()+"/getRow/"+str(rowindex+1)).json()
 
 def get_column(columnindex):
     """
@@ -68,7 +68,7 @@ def get_column(columnindex):
         IT WILL RETURN ROW DATA AT THE ENTERED INDEX IN JSON FORMAT.
 
     """
-    return requests.get(request_url()+"/get_column/"+str(columnindex)).json()
+    return requests.get(request_url()+"/getColumn/"+str(columnindex)).json()
 
 def get_cell(rowindex, columnindex):
     """
@@ -87,7 +87,7 @@ def get_cell(rowindex, columnindex):
 
     """
     celladdress=str(rowindex+1)+"/"+str(columnindex)
-    return requests.get(request_url()+"/get_cell/"+celladdress).json()
+    return requests.get(request_url()+"/getCell/"+celladdress).json()
 
 def get_header():
     """
@@ -98,7 +98,7 @@ def get_header():
         IT WILL RETURN HEADER IN A LIST FORMAT
 
     """
-    return requests.get(request_url()+"/get_header").json()
+    return requests.get(request_url()+"/getHeader").json()
 
 def append_row(rowdata):
     """
@@ -115,7 +115,7 @@ def append_row(rowdata):
         IT WILL RETURN INFORMATION WITH CORDINATES OF UPLOADED DATA.
 
     """
-    return requests.get(request_url()+"/appendRow/"+str(', '.join(rowdata.split(",")))).json()
+    return requests.get(request_url()+"/appendRow/"+str(','.join(rowdata.split(",")))).json()
 
 def append_rows(rowsdata):
     """
@@ -133,7 +133,7 @@ def append_rows(rowsdata):
         DESCRIPTION.
 
     """
-    return requests.get(request_url()+"/append_rows/"+str(', '.join(rowsdata.split(",")))).json()
+    return requests.get(request_url()+"/appendRows/"+str(','.join(rowsdata.split(",")))).json()
 
 def upload_file(filepath):
     """
@@ -154,7 +154,7 @@ def upload_file(filepath):
       ('file', open(filepath,'rb'))
     ]
     headers= {}
-    reqdest = request_url()+"/file-upload"
+    reqdest = "https://urbandb.mmapps.in/"+API+"/upload"
     response = requests.request("POST", reqdest, headers=headers, data = payload, files = files)
     return response.text#.encode('utf8')
 
@@ -174,7 +174,7 @@ def download_file(filename, downloadpath=""):
     None.
 
     """
-    reqfile = requests.get(request_url()+"/getupload/"+str(filename)).url
+    reqfile = requests.get("https://urbandb.mmapps.in/getupload/"+API+"/"+str(filename)).url
     response=requests.get(reqfile)
     with open(os.path.join(downloadpath,reqfile.split("/")[-1]), 'wb') as downloadfile:
         downloadfile.write(response.content)
@@ -202,13 +202,13 @@ def verify_user(idcolumn,userid,passwordcolumn):
     return requests.get(request_url()+"/verifyuser/"+"/".join(args)).text
 
 
-# print(pd.DataFrame.from_dict(get_all_rows()))
+# print(get_all_rows())
 # print(get_row(1))
 # print(get_column(1))
 # print(get_cell(1, 1))
 # print(append_row("p,y,t,h,o,n"))
 # print(get_header())
 # print(append_rows("p,y,t,h,o,n>>i,s>>p,o,w,e,r"))
-# print(upload_file("PathToMediaFile"))
-# print(download_file(4642))#.text
-# print(erify_user("Rep", "Howard", "OrderDate"))
+# print(upload_file("path/to/file"))
+# print(download_file("0.jpg"))#.text
+# print(verify_user("Rep", "Howard", "OrderDate"))
